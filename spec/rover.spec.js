@@ -25,7 +25,7 @@ it("constructor sets position and default values for mode and generatorWatts",fu
 });
 // //8
  it("response returned by receiveMessage contains the name of the message",function(){
-expect(response.messageName).toEqual('Test message with two commands')
+expect(response.message).toEqual('Test message with two commands')
 });
 //9
 it("response returned by receiveMessage includes two results if two commands are sent in the message",function(){
@@ -55,5 +55,5 @@ it("responds correctly to the status check command",function(){
   });
 });
 
-console.log(response2.results[1])
+console.log(response.message)
 

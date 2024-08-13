@@ -11,38 +11,38 @@ class Rover {
  
    };
 
-   receiveMessage(message) {
+   receiveMessage(messages) {
      
       
-     let  messageName = message.name;
+     
       let results = [];
      
    
 
-      for (let i = 0; i < message.commands.length; i++) {
-         if (message.commands[i].commandType === "MODE_CHANGE") {
-            if (message.commands[i].value != this.mode)
+      for (let i = 0; i < messages.commands.length; i++) {
+         if (messages.commands[i].commandType === "MODE_CHANGE") {
+            if (messages.commands[i].value != this.mode)
             {
-               this.mode = message.commands[i].value;
+               this.mode = messages.commands[i].value;
                //console.log("it works")
                results.push({ completed: true })
             }
          }
-        else if  (message.commands[i].commandType === "STATUS_CHECK") {
+        else if  (messages.commands[i].commandType === "STATUS_CHECK") {
 
 
           results.push({ completed: true, roverStatus: {mode: this.mode, generatorWatts: this.generatorWatts, position: this.position}});
           //console.log("it works")
           
          }
-      else if (message.commands[i].commandType === "MOVE"){
+      else if (messages.commands[i].commandType === "MOVE"){
          if (this.mode === "LOW_POWER")
          {
             results.push({ completed: false })
          }
          else if (this.mode !== "LOW_POWER"){
             results.push({ completed: true })
-            this.position = message.commands[i].value
+            this.position = messages.commands[i].value
          }
 
       }
@@ -53,7 +53,7 @@ class Rover {
       
    }
    
-   return {messageName, results} 
+   return {message: messages.name, results} 
 
 }
 
